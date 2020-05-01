@@ -1,10 +1,14 @@
 from django.shortcuts import render
+from .models import Product
+
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'ecommerce/index.html')
+    products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'ecommerce/index.html', context)
 
 
 def register_page(request):
@@ -20,8 +24,21 @@ def shopping_cart(request):
 
 
 def shop(request):
-    return render(request, 'ecommerce/shop.html')
+    all_products = Product.objects.all()
+    context = {'products': all_products}
+    return render(request, 'ecommerce/shop.html', context)
 
 
 def contact_page(request):
     return render(request, 'ecommerce/contact.html')
+
+
+def product(request, pk):
+    single_product = Product.objects.get(id=pk)
+    all_product = Product.objects.all()
+    context = {'single_product': single_product, 'all_product': all_product}
+    return render(request, 'ecommerce/product.html', context)
+
+
+def checkout(request):
+    return render(request, 'ecommerce/check-out.html')

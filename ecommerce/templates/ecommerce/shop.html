@@ -75,33 +75,36 @@
                     </div>
                     <div class="product-list">
                         <div class="row">
+                            {% for product in products %}
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="{% static 'img/products/product-9.jpg' %}" alt="">
+                                        <img src="{{ product.img.url }}" alt="">
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                            <li class="quick-view"><a href="{% url 'product' product.id %}">+ Quick View</a></li>
                                             <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
+                                        <div class="catagory-name">{{ product.category }}</div>
                                         <a href="#">
-                                            <h5>Converse Shoes</h5>
+                                            <h5>{{product.title}}</h5>
                                         </a>
                                         <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
+                                            TK {{product.discount_price}}
+                                            <span>TK {{product.price}}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
+
                     <div class="loading-more">
                         <i class="icon_loading"></i>
                         <a href="#">

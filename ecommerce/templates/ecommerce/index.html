@@ -5,7 +5,7 @@
 
  <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="img/hero-1.jpg">
+            <div class="single-hero-items set-bg" data-setbg="{% static 'img/hero-1.jpg' %}">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="single-hero-items set-bg" data-setbg="img/hero-2.jpg">
+            <div class="single-hero-items set-bg" data-setbg="{% static 'img/hero-2.jpg' %}">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="img/banner-1.jpg" alt="">
+                        <img src="{% static 'img/banner-1.jpg' %}" alt="">
                         <div class="inner-text">
                             <h4>Men’s</h4>
                         </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="img/banner-2.jpg" alt="">
+                        <img src="{% static 'img/banner-2.jpg' %}" alt="">
                         <div class="inner-text">
                             <h4>Women’s</h4>
                         </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="img/banner-3.jpg" alt="">
+                        <img src="{% static 'img/banner-3.jpg' %}" alt="">
                         <div class="inner-text">
                             <h4>Kid’s</h4>
                         </div>
@@ -165,34 +165,37 @@
                     <div class="filter-control">
                         <ul>
                             <li class="active">All</li>
-
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel">
+                        {% for product in products %}
+                        {% if product.category == 'men' %}
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="{% static 'img/products/man-1.jpg' %}" alt="">
+                                <img src="{{product.img.url}}" alt="">
                                 <div class="sale">Sale</div>
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
                                 <ul>
                                     <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="quick-view"><a href="{% url 'product' product.id %}">+ Quick View</a></li>
                                     <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
+                                <div class="catagory-name">{{product.category}}</div>
                                 <a href="#">
-                                    <h5>Pure Pineapple</h5>
+                                    <h5>{{product.title}}</h5>
                                 </a>
                                 <div class="product-price">
-                                    $14.00
-                                    <span>$35.00</span>
+                                    {{product.discount_price}}
+                                    <span>{{product.price}}</span>
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1">
