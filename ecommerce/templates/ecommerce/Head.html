@@ -38,62 +38,48 @@
                         <div class="advanced-search">
                             <button type="button" class="category-btn">All Categories</button>
                             <div class="input-group">
-                                <input type="text" placeholder="What do you need?">
-                                <button type="button"><i class="ti-search"></i></button>
+                                <form action="/s/" role="search">
+                                    <input type="text" name="q" placeholder="What do you need?">
+                                    <button type="submit" ><i class="ti-search"></i></button>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="heart-icon">
-                                <a href="#">
-                                    <i class="icon_heart_alt"></i>
-                                    <span>1</span>
-                                </a>
                             </li>
                             <li class="cart-icon">
-                                <a href="#">
+                                <a href="{% url 'shopping-cart' %}">
                                     <i class="icon_bag_alt"></i>
-                                    <span>3</span>
+                                    <span>{{cartItems}}</span>
                                 </a>
                                 <div class="cart-hover">
                                     <div class="select-items">
-                                        <table>
+                                       <!-- <table>
                                             <tbody>
+                                            {% for item in items %}
                                                 <tr>
-                                                    <td class="si-pic"><img src="img/select-product-1.jpg" alt=""></td>
+                                                    <td class="si-pic"><img src="{{item.product.imageURL}}" alt="" width="100" height="100"></td>
                                                     <td class="si-text">
                                                         <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
+                                                            <p>TK{{item.product.price}}x {{item.quantity}}</p>
+                                                            <h6>{{item.product.title}}</h6>
                                                         </div>
                                                     </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
+
                                                 </tr>
-                                                <tr>
-                                                    <td class="si-pic"><img src="img/select-product-2.jpg" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
+                                            {% endfor %}
+
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table> -->
                                     </div>
-                                    <div class="select-total">
-                                        <span>total:</span>
-                                        <h5>$120.00</h5>
-                                    </div>
+
                                     <div class="select-button">
-                                        <a href="#" class="primary-btn view-card">VIEW CARD</a>
-                                        <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+                                        <a href="{% url 'shopping-cart' %}" class="primary-btn view-card">VIEW CART</a>
+                                        <a href="{% url 'checkout' %}" class="primary-btn checkout-btn">CHECK OUT</a>
                                     </div>
                                 </div>
                             </li>

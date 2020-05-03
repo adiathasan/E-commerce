@@ -67,7 +67,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="product-pic-zoom">
-                                <img class="product-big-img" src="{{ single_product.img.url }}" alt="">
+                                <img class="product-big-img" src="{{ single_product.imageURL }}" alt="">
                                 <div class="zoom-icon">
                                     <i class="fa fa-search-plus"></i>
                                 </div>
@@ -75,12 +75,12 @@
 
                             <div class="product-thumbs">
                                 <div class="product-thumbs-track ps-slider owl-carousel">
-                                    <div class="pt active" data-imgbigurl="{{ single_product.img.url }}"><img
-                                            src="{{ single_product.img.url }}" alt="">
+                                    <div class="pt active" data-imgbigurl="{{ single_product.imageURL }}"><img
+                                            src="{{ single_product.imageURL }}" alt="">
                                     </div>
                                     {% for image in single_product.side_image.all %}
-                                    <div class="pt active" data-imgbigurl="{{ image.image.url }}"><img
-                                            src="{{ image.image.url}}" alt="">
+                                    <div class="pt active" data-imgbigurl="{{ image.imageURL }}"><img
+                                            src="{{ image.imageURL}}" alt="">
                                     </div>
                                     {% endfor %}
                                 </div>
@@ -107,9 +107,9 @@
                                 </div>
                                 <div class="quantity">
                                     <div class="pro-qty">
-                                        <input type="text" value="1">
+                                        <p>{{single_product.quantity}}</p>
                                     </div>
-                                    <a href="{% url 'shopping-cart' %}" class="primary-btn pd-cart">Add To Cart</a>
+                                    <button class="update-cart primary-btn pd-cart update-cart" data-action="add" data-product={{single_product.id}}>Add To Cart</button>
                                 </div>
                                 <ul class="pd-tags">
                                     <li><span>CATEGORY</span>: {{single_product.category}}</li>
@@ -259,7 +259,7 @@
                                             </div>
                                         </div>
                                         <div class="personal-rating">
-                                            <h6>Your Rating</h6>
+                                            <h6>Rating</h6>
                                             <div class="rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -312,7 +312,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="product-item">
                         <div class="pi-pic">
-                            <img src="{{related.img.url}}" alt="">
+                            <img src="{{related.imageURL}}" alt="">
                             <div class="sale">Sale</div>
                             <div class="icon">
                                 <i class="icon_heart_alt"></i>
