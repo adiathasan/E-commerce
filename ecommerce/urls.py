@@ -14,4 +14,9 @@ urlpatterns = [
     path('update_item/', update_item, name='update_item'),
     path('process_order/', processOrder, name='process_order'),
     path('s/', search, name='search'),
+    path('logout/', logout_page, name='logout'),
+    path('category/men/', men_page, name='men'),
+    path('category/women/', women_page, name='women'),
+    path('category/kids/', kids_page, name='kids'),
+    path('category/accessories/', accessories_page, name='accessories'),
 ]

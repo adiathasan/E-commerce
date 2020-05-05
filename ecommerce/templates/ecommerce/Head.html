@@ -14,7 +14,11 @@
                     </div>
                 </div>
                 <div class="ht-right">
-                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                    {% if not request.user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                    {% else %}
+                     <a href="{% url 'logout' %}" class="login-panel"><i class="fa fa-user"></i>Logout</a>
+                    {% endif %}
                     <div class="top-social">
                         <a href="#"><i class="ti-facebook"></i></a>
                         <a href="#"><i class="ti-twitter-alt"></i></a>
@@ -46,14 +50,14 @@
                         </div>
                     </div>
                     <div class="col-lg-3 text-right col-md-3">
+                        {% if request.user.is_authenticated %}
                         <ul class="nav-right">
-                            <li class="heart-icon">
-                            </li>
                             <li class="cart-icon">
                                 <a href="{% url 'shopping-cart' %}">
                                     <i class="icon_bag_alt"></i>
                                     <span>{{cartItems}}</span>
                                 </a>
+
                                 <div class="cart-hover">
                                     <div class="select-items">
                                        <!-- <table>
@@ -81,10 +85,15 @@
                                         <a href="{% url 'shopping-cart' %}" class="primary-btn view-card">VIEW CART</a>
                                         <a href="{% url 'checkout' %}" class="primary-btn checkout-btn">CHECK OUT</a>
                                     </div>
+
                                 </div>
+
                             </li>
-                            <li class="cart-price">$150.00</li>
+                            {% if cartPrice != 0  %}
+                            <li class="cart-price">Tk{{cartPrice}}</li>
+                            {% endif %}
                         </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -96,11 +105,10 @@
                         <i class="ti-menu"></i>
                         <span>All departments</span>
                         <ul class="depart-hover">
-                            <li class="active"><a href="#">Women’s Clothing</a></li>
-                            <li><a href="#">Men’s Clothing</a></li>
-                            <li><a href="#">Kid's Clothing</a></li>
-                            <li><a href="#">Brand Fashion</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            <li><a href="{% url 'women' %}">Women’s Clothing</a></li>
+                            <li><a href="{% url 'men' %}">Men’s Clothing</a></li>
+                            <li><a href="{% url 'kids' %}">Kid's Clothing</a></li>
+                            <li><a href="{% url 'accessories' %}">Accessories</a></li>
                         </ul>
                     </div>
                 </div>
@@ -108,20 +116,15 @@
                     <ul>
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="{% url 'shop' %}">Shop</a></li>
-                        <li><a href="#">Collection</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Men's</a></li>
-                                <li><a href="#">Women's</a></li>
-                                <li><a href="#">Kid's</a></li>
-                            </ul>
-                        </li>
                         <li><a href="{% url 'contact' %}">Contact</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="{% url 'shopping-cart' %}">Shopping Cart</a></li>
-                                <li><a href="#">Checkout</a></li>
+                                <li><a href="{% url 'checkout' %}">Checkout</a></li>
+                                {% if not request.user.is_authenticated %}
                                 <li><a href="{% url 'register' %}">Register</a></li>
                                 <li><a href="{% url 'login' %}">Login</a></li>
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>
