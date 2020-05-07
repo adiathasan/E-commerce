@@ -207,27 +207,63 @@ def search(request):
 
 
 def men_page(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_total_item
+        cartPrice = order.get_total_price
+    else:
+        order = {'get_total_price': 0, 'get_total_item': 0, 'shipping': False}
+        cartItems = order['get_total_item']
+        cartPrice = order['get_total_price']
     products = Product.objects.filter(category='men')
     template = 'ecommerce/men.html'
-    context = {'products': products}
+    context = {'products': products, 'cartItems': cartItems, 'cartPrice': cartPrice}
     return render(request, template, context)
 
 
 def women_page(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_total_item
+        cartPrice = order.get_total_price
+    else:
+        order = {'get_total_price': 0, 'get_total_item': 0, 'shipping': False}
+        cartItems = order['get_total_item']
+        cartPrice = order['get_total_price']
     products = Product.objects.filter(category='women')
-    context = {'products': products}
+    context = {'products': products, 'cartItems': cartItems, 'cartPrice': cartPrice}
     return render(request, 'ecommerce/women.html', context)
 
 
 def kids_page(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_total_item
+        cartPrice = order.get_total_price
+    else:
+        order = {'get_total_price': 0, 'get_total_item': 0, 'shipping': False}
+        cartItems = order['get_total_item']
+        cartPrice = order['get_total_price']
     products = Product.objects.filter(category='kids')
     template = 'ecommerce/kids.html'
-    context = {'products': products}
+    context = {'products': products, 'cartItems': cartItems, 'cartPrice': cartPrice}
     return render(request, template, context)
 
 
 def accessories_page(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_total_item
+        cartPrice = order.get_total_price
+    else:
+        order = {'get_total_price': 0, 'get_total_item': 0, 'shipping': False}
+        cartItems = order['get_total_item']
+        cartPrice = order['get_total_price']
     products = Product.objects.filter(category='accessories')
     template = 'ecommerce/accessories.html'
-    context = {'products': products}
+    context = {'products': products, 'cartItems': cartItems, 'cartPrice': cartPrice}
     return render(request, template, context)

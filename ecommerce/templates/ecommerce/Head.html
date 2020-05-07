@@ -17,7 +17,7 @@
                     {% if not request.user.is_authenticated %}
                     <a href="{% url 'login' %}" class="login-panel"><i class="fa fa-user"></i>Login</a>
                     {% else %}
-                     <a href="{% url 'logout' %}" class="login-panel"><i class="fa fa-user"></i>Logout</a>
+                     <a href="{% url 'logout' %}" class="login-panel"><i class="fa fa-user"></i>Hey {{request.user}}/Logout</a>
                     {% endif %}
                     <div class="top-social">
                         <a href="#"><i class="ti-facebook"></i></a>
