@@ -140,6 +140,7 @@ def checkout(request):
         order = {'get_total_price': 0, 'get_total_item': 0, 'shipping': False}
         cartItems = order['get_total_item']
         cartPrice = order['get_total_price']
+        price_dollar = 0
     context = {'items': items, 'order': order, 'cartItems': cartItems,
                'cartPrice': cartPrice, 'price_dollar': price_dollar}
     return render(request, 'ecommerce/check-out.html', context)
