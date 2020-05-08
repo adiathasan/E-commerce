@@ -11,10 +11,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import django_heroku
 import os
+import dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Add .env variables anywhere before SECRET_KEY
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -23,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'kso$fr3i=mig0-4j6ir@ed5@ia1f+bs7utd63u^gd)qg$0y)m&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'e-commerce-1134.herokuapp.com']
 
@@ -125,11 +131,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AWS_S3_REGION_NAME = "ap-south-1"
 AWS_USER_NAME = 'Ratul'
-AWS_ACCESS_KEY_ID = 'AKIAU3REZG7F3PW6CEHC'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get('aws_key')
+AWS_SECRET_ACCESS_KEY = os.environ.get('aws_pass')
 AWS_STORAGE_BUCKET_NAME = 'testing-e-commerce'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())
+
+print(AWS_ACCESS_KEY_ID)
